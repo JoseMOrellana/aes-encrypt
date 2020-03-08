@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="assets/css/all.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+	<script defer src="assets/js/all.js"></script>
+	<title>Cifrado AES</title>
+</head>
+<body>
+	<div id="progress-bar"></div>
+	<h1>Welcome to AES encryption</h1>
+
+	<div class="container space-around">
+		<div class="inputArea">
+			<h3>Input Data</h3>
+			<div>
+				<label for="input-string" class="first-label">Insert string</label><br>
+				<input type="text" name="input-string" id="input-string" maxlength="16" placeholder="Initial string..">
+				<span id="icon-span"></span>
+			</div>
+			<div id="cypher-string-area">
+				<label for="cypher-string">Insert cypher key</label>
+				<input type="text" name="cypher-string" id="cypher-string" maxlength="16" placeholder="Cypher key...">
+				<span id="cypher-icon-span"></span>
+			</div>
+			<span id="warning-text"></span>
+			<input type="submit" id="submit-button" disabled value="Encrypt">
+			<input type="reset" id="reset-button">
+		</div>
+
+		<div class="circle desktop-only">
+			<i class="fas fa-arrow-circle-right"></i>
+		</div>
+
+		<div class="circle mobile-only">
+			<i class="fas fa-arrow-circle-down"></i>
+		</div>
+
+		<div class="initialValuesArea">
+			<h3>Initial Values:</h3>
+			<div class="init-values-table-container">
+				<table class="init-values-table" id="first-state-table">
+				<tr>
+					<th colspan="4">Initial State Matrix</th>
+				</tr>
+				<tr>
+					<td id="state00"></td>
+					<td id="state01"></td>
+					<td id="state02"></td>
+					<td id="state03"></td>
+				</tr>
+				<tr>
+					<td id="state10"></td>
+					<td id="state11"></td>
+					<td id="state12"></td>
+					<td id="state13"></td>
+				</tr>
+				<tr>
+					<td id="state20"></td>
+					<td id="state21"></td>
+					<td id="state22"></td>
+					<td id="state23"></td>
+				</tr>
+				<tr>
+					<td id="state30"></td>
+					<td id="state31"></td>
+					<td id="state32"></td>
+					<td id="state33"></td>
+				</tr>
+			</table>
+
+			<table class="init-values-table" id="cypher-table">
+				<tr>
+					<th colspan="4">Initial Cypher Key</th>
+				</tr>
+				<tr>
+					<td id="key00"></td>
+					<td id="key01"></td>
+					<td id="key02"></td>
+					<td id="key03"></td>
+				</tr>
+				<tr>
+					<td id="key10"></td>
+					<td id="key11"></td>
+					<td id="key12"></td>
+					<td id="key13"></td>
+				</tr>
+				<tr>
+					<td id="key20"></td>
+					<td id="key21"></td>
+					<td id="key22"></td>
+					<td id="key23"></td>
+				</tr>
+				<tr>
+					<td id="key30"></td>
+					<td id="key31"></td>
+					<td id="key32"></td>
+					<td id="key33"></td>
+				</tr>
+			</table>
+			</div>
+
+			<div class="result">
+				<h3>Result:</h3>
+				<span id="result-output"></span>
+			</div>
+		</div>
+	</div>
+		
+		<div id="results-area">
+			<div class="toggle-area">
+				<span id="all" class="result-toggle selected">All</span>
+				<span id="sub-keys" class="result-toggle">Sub Keys</span>
+				<span id="sub-bytes" class="result-toggle">Sub Bytes</span>
+				<span id="shift-row" class="result-toggle">Shift Row</span>
+				<span id="mix-column" class="result-toggle">Mix Column</span>
+				<span id="round-result" class="result-toggle">Round Results</span>
+			</div>
+
+			<div id="all-area" class="container space-between results"></div>
+		
+			<div id="sub-keys-area" class="container space-between results"></div>
+		
+			<div id="sub-bytes-area" class="container space-between results"></div>
+			
+			<div id="shift-row-area" class="container space-between results"></div>
+		
+			<div id="mix-column-area" class="container space-between results"></div>
+		
+			<div id="round-result-area" class="container space-between results"></div>
+		</div>
+		
+
+		<script src="modules/r-con.js"></script>
+		<script src="modules/s-box.js"></script>
+		<script src="modules/cypher.js"></script>
+		<script src="index.js"></script>
+</body>
+</html>
