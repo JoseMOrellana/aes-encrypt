@@ -1,25 +1,23 @@
 //Function that generates all subkeys, given the initial key and the number of subkeys to generate
 const generateSubkeys = (initialKey, n) => {
 	
-	let keysArray = new Array(n).fill([])
+	keysArray = [[],[],[],[],[],[],[],[],[],[]]
+	let matrix = []
+	let array = []
 	for (let i = 0; i < n; i++) {
-		let previousMatrix, array;
-		i == 0 ? previousMatrix = initialKey : previousMatrix = keysArray[i - 1]
+		i == 0 ? matrix = initialKey : matrix = keysArray[i - 1]
 		
-		keysArray[i] = new Array(4).fill([])
-		array = getRotatedColumn(previousMatrix, 3)
-		const sboxArray = array.map(element => {
+		keysArray[i] = [ [], [], [], []]
+		array = getRotatedColumn(matrix, 3)
+		sboxArray = array.map((element) => {
 						return sbox[parseInt(element, 16)]
 					})
-		const rconArray = rcon[i]
-		const previousMatrixFirstColumn = getColumn(previousMatrix, 0)
-		const firstRow = xorArrays(xorArrays(previousMatrixFirstColumn,sboxArray), rconArray)
+		rconArray = rcon[i]
+		let firstRow = xorArrays(xorArrays(getColumn(matrix, 0),sboxArray), rconArray)
 		keysArray[i] = setColumn(keysArray[i], firstRow, 0)
 		for (let j = 1; j < 4; j++) {
-			const previousMatrixColumn = getColumn(previousMatrix, j)
-			const newMatrixColumn = getColumn(keysArray[i], j - 1)
-			const newColumn = xorArrays(previousMatrixColumn, newMatrixColumn)
-			keysArray[i] = setColumn(keysArray[i],newColumn, j)
+			let row = xorArrays(getColumn(matrix, j), getColumn(keysArray[i], j - 1))
+			keysArray[i] = setColumn(keysArray[i],row, j)
 		}
 	}
 	return keysArray
@@ -196,7 +194,7 @@ const printAllResults = (matrix, str) => {
 				let boxes = document.getElementsByClassName( str + i + j + k)
 				boxes = Array.from(boxes)
 				boxes.forEach(box => {
-					box.innerHTML = element
+					box.innerHTML = element.padStart(2,"0")
 				})
 			}) 
 		})
@@ -234,7 +232,6 @@ const cypher = ( str, cypherKey, rounds = 10) => {
 
 	const strMatrix = generateMatrixFromStr(str)
 	const cypherKeyMatrix = generateMatrixFromStr(cypherKey)
-
 	subkeysMatrixes = generateSubkeys(cypherKeyMatrix, rounds)
 	subBytesMatrixes = initializeMatrix(rounds)
 	shiftedRowsMatrixes = initializeMatrix(rounds)

@@ -216,7 +216,7 @@ const printMatrix = (matrix, str) => {
 	matrix.map((array, i) => {
 		array.map((element, j) => {
 			let box = document.getElementById(str + i + j)
-			box.value = element
+			box.innerHTML = element.padStart(2, "0")
 		})
 	})
 }
