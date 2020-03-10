@@ -320,7 +320,8 @@ span#all.selected {
 	}
 
 	.initialValuesArea {
-		width: 90%;
+		width: 100%;
+		min-width: 300px;
 	}
 }
 
@@ -328,5 +329,16 @@ span#all.selected {
 	.result-toggle {
 		font-size: 14px;
 		padding: 8px 4px;
+	}
+}
+
+@media ( max-width: 451px ) {
+	.result-toggle {
+		font-size: 12px;
+		padding: 4px 2px;
+	}
+
+	#result-output {
+		font-size: 16px
 	}
 }
