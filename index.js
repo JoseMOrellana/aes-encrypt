@@ -35,7 +35,7 @@ resultButtonsArray.map(resultButton => {
 
 //Adding event listeners to both text input box
 stringInputBox.addEventListener('keyup', (e) => {
-	if (stringInputBox.value.length !== 16) {
+	if (stringInputBox.value.length < 16) {
 		inputIsInvalid( stringInputBox, stringIcon)
 		cypherKeyInputArea.style.display = "none"
 	} else {
@@ -48,11 +48,12 @@ stringInputBox.addEventListener('keyup', (e) => {
 })
 
 cypherInputBox.addEventListener('keyup', (e) => {
-	if (cypherInputBox.value.length !== 16) {
+	if (cypherInputBox.value.length < 16) {
 		inputIsInvalid( cypherInputBox, cypherIcon)
 	} else {
 		inputIsValid( cypherInputBox, cypherIcon)
 		submitButton.disabled = false
+		
 	}	
 })
 
@@ -120,6 +121,7 @@ const inputIsValid = ( input, inputIcon ) => {
 	input.classList.add('valid-input-box')
 	inputIcon.innerHTML = "<i class='fas fa-check-circle valid-icon-color'></i>"
 	warningText.innerHTML = ""
+	input.value = input.value.substr(0,16)
 }
 
 const resetInputs = () => {
