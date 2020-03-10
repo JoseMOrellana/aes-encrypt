@@ -28,6 +28,8 @@ resultButtonsArray.map(resultButton => {
 		const area = getArea(this.getAttribute('id'));
 
 		replaceElementWithClass('show', area )
+
+		area.style.borderColor = window.getComputedStyle(this).backgroundColor;
 	})
 })
 
